@@ -1,5 +1,89 @@
 # 서민석 [202030215]
 
+## [04월 06일]
+### 역 for 반복문
+
+* for in 반복문(index값을 가져옴)
+```
+for (let 인덱스 in 배열) { 
+
+}
+```
+* for of 반복문(요소값을 가져옴)
+```
+for (let 요소 of 배열) {
+
+}
+```
+
+### 중첩 반복문
+* 별 피라미드 예시
+```
+let output = "";
+
+for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10 - i; j++){
+        output += '*';
+    }
+    output += `\n`;
+}
+
+console.log(output);
+```
+### break 키워드
+* 반복문에서 벗어날때 사용(switch문에서 많이 사용)
+```
+let i = 0;
+let array = [1, 31, 273, 57, 8, 11, 32];
+let output;
+
+while (true) {
+    if (array[i] % 2 == 0) {
+        output = array[i];
+        break;
+    }
+
+    i = i + 1;
+}
+
+console.log('처음 발견한 짝수는 ${output}입니다.')
+```
+
+### push
+* 배열의 끝에 원하는 값을 추가해주는 함수.
+```
+bar = [0];
+console.log("\n push");
+foo.push("자료구조",1, 0.5);
+bar.push(1, 2, 3);
+console.log(foo);
+```
+### pop
+* 배열의 마지막 주소에 있는 값을 제거해주는 함수.
+```
+console.log("\n pop");
+foo.pop();
+console.log(foo);
+```
+### shift
+* 배열의 첫번째 주소에 있는 값을 제거한 후에 반환해주는 함수.
+
+### continue 키워드
+* 반복문 내부에서 현재 반복을 멈추고 다음 반복을 진행
+
+```
+for (let i = 1; i < 10; i++){
+    if (i % 2 == 0) {
+        continue;
+    }
+
+    console.log(i)
+}
+```
+### Scope
+* 변수를 사용할 수 있는 범위
+* 스코프 == 블록
+
 ## [03월 30일]
 ### *중첩 조건문*
 * 중첩 조건문이란, A->(B->C)나 (A->B)->C처럼 조건문의 전건이나 후건이 조건문인 조건문을 뜻합니다.
