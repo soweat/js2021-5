@@ -1,5 +1,146 @@
 # 서민석 [202030215]
 
+## [04월 13일]
+### 익명 함수
+* 이름이 없는 함수
+* 함수를 호출하면 함수 내부의 코드 덩어리가 모두 실행
+```
+// code5-1 익명 함수
+let foo = function () {
+    console.log("함수의 첫 번째 줄");
+    console.log("함수의 두 번째 줄");
+};
+
+foo();
+console.log(foo);
+/// 함수의 첫번째 줄
+    함수의 두번째 줄
+    [function: foo]
+```
+
+### 선언적 함수
+* 이름이 있는 함수
+```
+// code5-2 선언적 함수
+function foo () {
+    console.log("함수의 첫 번째 줄");
+    console.log("함수의 두 번째 줄");
+};
+
+foo();
+console.log(foo);
+
+/// 함수의 첫번째 줄
+    함수의 두번째 줄
+    [function: foo]
+```
+
+### 화살표 함수[ECMAScript6]
+* '하나의 표현식을 리턴하는 함수’를 만들 때는 중괄호 생략 가능
+
+```
+let foo = () => {
+    console.log("함수의 첫 번째 줄");
+    console.log("함수의 두 번째 줄");
+};
+
+foo();
+console.log(foo);
+/// 함수의 첫번째 줄
+    함수의 두번째 줄
+    [function: foo]
+```
+
+### github clone
+$ github clone ("주소")
+
+### 리턴 없는 함수
+```
+/// 5-6 리턴 없는 함수
+function print(message) {
+    console.log(`"${message}"라고 말했습니다`);
+}
+
+print("안녕하세요");
+print("안녕히계세요");
+```
+
+### 함수 매개 변수 초기화
+
+* 매개 변수를 입력하지 않고 함수 호출
+``` 
+ex)
+function print(name, count) {
+    if (!count) {
+        count = 1;
+    }
+    console.log(`${name}이/가 ${count}개 있습니다.`);
+}
+print("사과", 10);
+print("사과");
+/// "사과"이/가 "10"개 있습니다.
+    "사과"이/가 "undefined"개 있습니다.
+```
+
+### 조건문을 활용한 매개 변수 초기화
+* 조건문으로 매개 변수를 확인, count가 undefined일 때 1로 초기화
+
+``` 5-11
+ex)
+function print(무명, 1) {
+    if (!count) {
+        count = 1;
+    }
+    console.log(`${name}이/가 ${count}개 있습니다.`);
+}
+
+print("사과", 10);
+print("사과");
+print();
+/// "
+    "사과"이/가 "10"개 있습니다.
+    "사과"이/가 "1"개 있습니다.
+    "무명"이/가 "1"개 있습니다.
+```
+
+### 콜백 함수
+
+* 함수의 매개 변수로 전달되는 함수
+
+```
+function tentimes(foo) {
+    for (let i = 0; i < 10; i++) {
+        foo();
+    }
+}
+tentimes 
+
+```
+### 표준 내장 함수
+```
+ex)5-15
+let inputA = "52";
+let inputB = "52.273";
+let inputC = "1401동"
+
+console.log(parseInt(inputA));
+
+console.log(parseInt(inputB));
+console.log(parseFloat(inputC));
+
+console.log(parseInt(inputC));
+
+
+// 52
+   52
+   52.273
+   1401
+```
+
+### 타이머 함수
+* '특정 시간 후에' 또는 '특정 시간마다' 어떤 일을 할 때 사용
+* 시간은 밀리초로 지정. 1초를 나타내려면 1000(밀리초)을 입력
+
 ## [04월 06일]
 ### 역 for 반복문
 
