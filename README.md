@@ -25,10 +25,12 @@ setInterval(function() {
 * 종료 : Ctrl + C
 * 실행화면에서 ^C는 Ctrl + C를 눌렀다는 의미임
 <hr/>
+
 ### 타이머 제거 함수
 함수|설명
 ---|---
 clearinterval(아이디)|특정 시간마다 실행하던 함수 호출을 정지합니다.
+
 ```
 code 5-17 clearinterval()함수 예시
 // 1초마다
