@@ -1,9 +1,164 @@
 # 서민석 [202030215]
 
+## [05월 04일]
+### *프로토타입*
+* 생성자 함수로 만든 객체는 프로토타입 공간에 메소드를 지정해서 <br>모든 객체가 공유 하도록 함, 해당 함수를 생성자 함수로 사용했을 때만 의미가 있음
+
+###### code 6-15 프로토타입을 사용한 메소드 생성
+```
+// 생성자 함수
+function Product(name, price) {
+    this.name = name;
+    this.price = price;
+}
+
+// 프로토타입에 메소드를 선언합니다.
+Product.prototype.print = function () {
+    console.log(`${this.name}의 가격은 ${this.price}원입니다.`);
+};
+
+// 객체를 생성합니다.
+let product = new Product("바나나", 1200);
+
+// 메소드를 호출합니다.
+product.print();
+```
+
+* 객체 지향적으로 구성한 객체 배열
+
+```
+// 생성자 함수
+function  Product(name, price) {
+    this.name = name;
+    this.price = price;
+}
+// 프로토타입에 메소드를 선언합니다.
+Product.prototype.print = function () {
+    console.log(`${this.name}의 가격은 $(this.price)원입니다.`);
+};
+
+// 상품 목록을 선언합니다.
+let products = {
+    new Product(`바나나`, 1200),
+    new Product(`사과`, 2000),
+    new Product(`배`, 3000),
+    new Product(`고구마`, 700),
+    new Product(`감자`, 600),
+    new Product(`수박`, 5000)
+};
+
+// 반복해서 출력합니다.
+for (let product of products) {
+    product.print();
+}
+```
+<hr>
+
+### null의 값과 자료형
+###### code 6-17 null의 값과 자료형
+```
+console.log(null);
+console.log(typeof(null));
+```
+
+### 기본 자료형과 객체 자료형의 차이
+
+* 객체 숫자, 문자열, 불
+
+```
+// 객체 자료형
+let number = new Number(273);
+let string = new String('안녕하세요');
+let boolean = new Boolean(true);
+
+// 자료형을 출력합니다
+console.log(typeof number);
+console.log(typeof string);
+console.log(typeof boolean);
+```
+
+* 기본 자료형의 속성 또는 메소드를 사용할 때 기본 자료형이 자동으로<br>객체로 변환이 됨. 즉, 기본 자료형과 객체 자료형 모두 속성과 메소드를 사용함
+
+* 차이점 : 기본 자료형은 객체가 아니므로 속성과 메소드를 추가할 수 없음
+
+<hr>
+
+* 기본 자료형에 프로토타입으로 메소드 추가
+
+###### code 7-5 프로토타입에 메소드 추가
+
+```
+// 변수를 생성합니다.
+let primitiveNumber = 273;
+
+// 메소드를 추가합니다.
+Number.prototype.method = function () {
+    return 'Primitive Method';
+};
+
+// 메소드를 실행합니다.
+console.log(primitiveNumber.method());
+```
+
+<hr>
+
+### Number 객체
+
+* [예제 7-1] Number 객체의 메소드
+* Number 객체 생성
+
+###### code 7-6
+
+```
+let numberFromLiteral = 273;
+let numberFromConstructor = new Number(273);
+```
+
+#### 메소드
+
+###### 표 7-1
+
+메소드|설명
+----|----
+toExponential()|숫자를 지수 표시로 나타낸 문자열을 리턴합니다.
+toFixed()|숫자를 고정소수점 표시로 나타낸 문자열을 리턴합니다.
+toPrecision()|숫자를 길이에 따라 지수 표시 또는 고정소수점 표시로 나타낸 문자열을 리턴합니다.
+
+### 생성자 함수의 속성
+* 생성자 함수에 속성과 메소드 추가
+
+###### code 7-8
+
+```
+// 생성자 함수를 생성합니다
+function Constructor() { }
+Constructor.property = 273;
+Constructor.method = function () { };
+
+// 생성자 함수의 속성과 메소드를 출력합니다.
+console.log(Constructor.property);
+console.log(Constructor.method);
+```
+
+###### 표7-2
+
+속성|설명
+-|-
+MAX_VALUE|자바스크립트의 숫자가 나타낼 수 있는 최대 숫자
+MIN_VALUE|자바스크립트의 숫자가 나타낼 수 있는 최소 숫자
+NaN|자바스크립트의 숫자로 나타낼 수 없는 숫자
+POSITIVE_INFINITY|양의 무한대 숫자
+NEGATIVE_INFINITY|음의 무한대 숫자
+
+
+
+
+
 ## [04월 27일]
 ### *타이머 함수*
 * '특정 시간 후에' 또는 '특정 시간마다' 어떤 일을 할 때 사용
 * 시간을 밀리초로 지정. 1초를 나타내려면 1000(밀리초)을 입력
+
 
 
 함수|설명 
@@ -30,7 +185,6 @@ setInterval(function() {
 함수|설명
 ---|---
 clearinterval(아이디)|특정 시간마다 실행하던 함수 호출을 정지합니다.
-
 ```
 code 5-17 clearinterval()함수 예시
 // 1초마다
