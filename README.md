@@ -1,5 +1,196 @@
 # 서민석 [202030215]
 
+## [05월 11일]
+### *Date 객체*
+
+###### 표7-5
+생성자 함수|설명
+--|--
+new Date()|현재 시간으로 Date 객체를 생성합니다.
+new Date(유닉스 타임)|유닉스 타임(1970년 1월 1일 00시 00분 00초부터 경과한 밀리초)으로 Date 객체를 생성합니다.
+new Date(<시간문자열>)|문자열로 Date 객체로 생성합니다.
+new Date(<년>,<월-1>,<일>,<시간>,<분>,<초>,<밀리초>)|시간 요소(년,월-1,일,시간,분,초,밀리초)를 기반으로 Date 객체를 생성합니다.
+* Month를 나타내는 '월'은 0부터 시작,
+0 →1월, 11 → 12월
+
+<hr>
+
+* [예제 7-5] Date 객체 생성
+
+###### code7-18
+
+```
+// 현재 시간을 기반으로 Date 객체를 생성합니다.
+let dateA = new Date();
+console.log(dateA);
+
+// 유닉스 타임(1970년 1월 1일 00시 00분 00초부터 경과한 밀리초)
+let dateB = new Date(692281800000);
+console.log(dateC);
+
+// 문자열을 기반으로 Date 객체를 생성합니다.
+let dateC = new Date("December 9, 1991 21:30:00")
+console.log(dateC);
+
+// 시간 요소(년, 월 - 1, 일, 시간, 분, 초, 밀리초)를 기반으로 Date 객체를 생성합니다.
+let dateD = new Date(1991, 12 - 1, 9, 21, 30, 0, 0);
+console.log(dateD);
+```
+
+### *메소드 활용*
+
+###### Date 객체
+* getOO() 형태 메소드, setOO() 형태 메소드 : FullYear, Month, Day, Hours, Minutes, Seconds 등 사용
+
+<hr>
+
+###### [예제 7-6] 시간 더하기
+* 현재 시간에 1년, 11월, 7일을 더해 출력. (현재 시간:2016년 8월 16일)
+
+###### code 7-19
+
+```
+// 현재 시간을 구합니다.
+let date = new Date();
+
+// 출력1
+console.log(date);
+
+// 시간을 더합니다.
+date.setFullYear(date.FullYear() + 1);
+date.setMonth(date.getMonth() + 11);
+date.setDate(date.getDate() + 3);
+
+// 출력2
+console.log(date);
+```
+
+<hr>
+
+### *Array 객체*
+
+#### Array 객체의 기본 메소드
+
+* 대부분 파괴적 메소드로 자기 자신을 변경
+
+###### 표 7-6
+메소드|설명
+-|-
+concat()|매개 변수로 입력한 배열의 요소를 모두 합쳐 배열을 만들어 리턴합니다.
+join()|배열 안의 모든 요소를 문자열로 만들어 리턴합니다.
+pop()*|배열의 마지막 요소를 제거하고 리턴합니다.
+push()*|배열의 마지막 부분에 새로운 요소를 추가합니다.
+reverse()*|배열의 요소 순서를 뒤집습니다.
+slice()|배열 요소의 지정한 부분을 리턴합니다.
+sort*|배열의 요소를 정렬합니다.
+splice()*|배열 요소의 지정한 부분을  삭제하고 삭제한 요소를 리턴합니다.
+* 표시된메소드는 자기 자신을 변화시킵니다.
+
+<hr>
+
+* [예제 7-8] 배열 가공
+
+###### code 7-21
+
+```
+// 배열을 선언합니다.
+let array = [{
+    name: '고구마',
+    price: 1000
+}, {
+    name: '감자',
+    price: 500
+}, {
+    name: '바나나'
+    price: 1500
+}];
+// 배열의 요소를 꺼냅니다.
+let popped = array.pop();
+console.log('- 배열에서 꺼낸 요소');
+console.log(popped);
+console.log('- pop() 메소드를 호출한 이후의 배열');
+console.log(array);
+
+// 배열에 요소를 넣습니다.
+array.push(popped);
+array.push({
+    name: '사과',
+    price: 2000
+});
+console.log('- push() 메소드를 호출한 이후의 배열');
+console.log(array);
+```
+
+<hr>
+
+### *ECMAScript5에서 추가된 메소드*
+
+* 모질라 레퍼런스 - Array
+
+###### 표 7-7
+메소드|설명
+-|-
+forEach()|배열의 요소를 하나씩 뽑아 반복을 돌립니다.
+map()|콜백 함수에서 리턴하는 것을 기반으로 새로운 배열을 만듭니다.
+filter()|콜백 함수에서 true를 리턴하는 것으로만 새로운 배열을 만들어 리턴합니다.
+
+* 콜백 함수를 매개 변수로 받음
+
+<hr>
+
+* [예제 7-10] ECMAScript5에서 추가된 Array 객체의 메소드
+
+###### code 7-24
+
+```
+// 배열을 선언합니다.
+let array = [52, 273, 32, 64, 72];
+
+// forEach() 메소드
+console.log('--- for Each() 메소드 ---');
+array.forEach((item, index) => {
+    console.log(`-${index}번째 요소는 ${item}입니다.`);
+});
+
+// map() 메소드
+console.log();
+console.log('--- map() 메소드 ---');
+let outputA = array.map((item, index) => {
+    // 배열의 모든 요소를 제곱해서 새로운 배열을 만듭니다.
+    return item * item;
+});
+console.log(outputA);
+
+// filter() 메소드
+console.log();
+console.log('--- filter() 메소드 ---');
+let outputB = array.filter((item, index) => {
+    // 짝수만 추출합니다.
+    return item % 2 == 0;
+});
+console.log(outputB);
+```
+
+### *프로토타입에 메소드추가*
+* 프로토타입에 메소드를 추가하면 해당 자료형 전체에 추가 가능
+* String 생성자 함수의 prototype 속성에 contain ()메소드를 추가
+
+```
+// 프로토타입에 메소드를 추가합니다.
+String.prototype.contain = function (input) {
+    return this.index0f(input) >= -1;
+    };
+
+    // 메소드를 활용합니다.
+    console.log('안녕하세요',contain('안녕'));
+    console.log('안녕하세요',contain('데굴데굴'));
+}
+```
+
+<hr>
+
+
+
 ## [05월 04일]
 ### *프로토타입*
 * 생성자 함수로 만든 객체는 프로토타입 공간에 메소드를 지정해서 <br>모든 객체가 공유 하도록 함, 해당 함수를 생성자 함수로 사용했을 때만 의미가 있음
