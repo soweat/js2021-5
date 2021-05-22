@@ -1,9 +1,182 @@
 # 서민석 [202030215]
 
-## [05월 11일]
-### *Date 객체*
+## [05월 18일]
 
-###### 표7-5
+### 전역변수
+* 전역변수,전역 함수,전역 개체 : 모든 곳에서 사용할 수 있는 것들
+
+###### 문자열 자료형의 전역 변수
+
+변수|설명
+-|-
+__filename|현재 실행 중인 코드의 파일 경로를 나타냅니다.
+__dirname|현재 실행 중인 코드의 폴더 경로를 나타냅니다.
+
+<hr>
+
+### process 객체의 속성과 이벤트
+
+* Node.js는 process 전역 객체를 제공
+* process 객체는 프로세스 정보를 제공하며, 제어할 수 있게 하는 객체
+
+###### process 객체의 속성
+속성|설명
+-|-
+env|컴퓨터 환경 정보를 나타냅니다.
+version|Node.js 버전을 나타냅니다.
+versions|Node.js와 종속된 프로그램 버전을 나타냅니다.
+arch|프로세서의 아키텍처를 나타냅니다.
+platform|플랫폼을 나타냅니다.
+
+###### process 객체의 메소드
+메소드|설명
+-|-
+exit([exitCode=0])|프로그램을 종료합니다.
+memoryUsage()|메모리 사용 정보 객체를 리턴합니다.
+uptime()|현재 프로그램이 실행된 시간을 리턴합니다.
+
+<hr>
+
+### os 모듈
+* os 모듈 추출
+
+```
+// 모듈을 추출합니다.
+const os = require('os');
+```
+
+###### os 모듈의 메소드
+메소드|설명
+-|-
+hostname()|운영체제의 호스트 이름을 리턴합니다.
+type()|운영체제의 이름을 리턴합니다.
+platform()|운영체제의 플랫폼을 리턴합니다.
+arch()|운영체제의 아키텍처를 리턴합니다.
+release()|운영체제의 버전을 리턴합니다.
+uptime()|운영체제가 실행된 시간을 리턴합니다.
+totalmem()|시스템의 총 메모리를 리턴합니다.
+freemem()|시스템의 사용 가능한 메모리를 리턴합니다.
+cpus()|CPU의 정보를 담은 객체를 리턴합니다.
+getNetworkInterfaces()|네트워크 인터페이스의 정보를 담은 배열을 리턴합니다.
+
+<hr>
+
+### url 모듈
+* url 모듈 추출
+
+```
+// 모듈을 추출합니다.
+const url = require('url');
+```
+
+###### url 모듈의 메소드
+메소드|설명
+-|-
+parse(urlStr[.parseQueryString = false,slashesDenoteHost = false])|URL 문자열을 URL 객체로 변환해 리턴합니다.
+format(urlObj)|URL 객체를 URL 문자열로 변환해 리턴합니다.
+resolve(from,to)|매개 변수를 조합하여 완전한 URL 문자열을 생성해 리턴합니다.
+
+<hr>
+
+### File System 모듈
+
+* fr.readFileSync() 메소드를 사용해 동기적으로 파일을 읽음
+```
+// 모듈을 추출합니다.
+const fs = require('fs');
+// 파일을 읽어들이고 출력합니다.
+const file = fs.readFileSync('textfile.txt');
+console.log(file);
+console.log(file.toString());
+```
+* fs.readFile() 메소드를 사용해 비동기적으로 파일을 읽음
+```
+// 모듈을 추출합니다.
+const fs = require('fs');
+// 파일을 읽어들입니다.
+fs.readFile('textfile.txt', (error, file) => {
+    // 출력합니다.
+    console.log(file);
+    console.log(file.toString());
+});
+```
+* 동기와 비동기의 실행 결과는 같지만 내부 실행 구조는 다름
+
+<hr>
+
+### 비동기 처리의 장점
+* 웹 서버를 C++ 프로그래밍 언어로 만들면 무척 빠르지만, 개발과 유지 보수는 어려움
+* 전 세계 웹 서비스 기업(페이스북, 트위터 등)도 C++로 웹 서버를 개발하지 않고 PHP, 자바, 루비, 파이썬, Node.js 등 프로그래밍 언어로 개발
+* 프로그래밍 언어 자체는 느리지만 큰 의미가 없다고 판단해 개발 속도와 유지 보수성이 좋은 프로그래밍 언어를 사용
+* 자바스크립트 프로그래밍 언어는 C++, 자바보다 느리지만 Node.js를 사용하면 손쉽게 비동기 처리를 구현하여 빠른 처리가 가능
+
+<hr>
+
+###  노드 패키지 매니저
+* npm을 이용한 외부 모듈 설치
+
+```
+> npm install <모듈 이름>
+예> npm install express
+```
+
+<hr>
+
+### request 모듈
+* 웹 요청을 쉽게 만들어주는 모듈로 외부 모듈이다.
+
+```
+// 설치
+> npm install request
+```
+
+###### request 모듈 추출
+
+```
+// 모듈을 추출합니다.
+const request = require('request');
+```
+
+<hr>
+
+### cheerio 모듈
+
+* request 모듈로 가져온 웹 페이지는 단순한 HTML 문자열이다.
+
+```
+// cheerio 모듈 설치
+> npm install cheerio
+```
+
+###### cheerio 모듈 추출
+
+```
+// 모듈을 추출합니다.
+const cheerio = require('cheerio');
+```
+
+<hr>
+
+### async 모듈
+
+* 비동기 처리를 많이 하면 ‘콜백 지옥’이 발생 (콜백 지옥은
+콜백 함수를 여러 개 들여쓰기 하여 코드를 보기 힘든 상태를 의미)
+
+```
+// async 모듈 설치
+> npm install async
+```
+
+###### async 모듈 추출
+```
+// 모듈을 추출합니다.
+const async = require('async');
+```
+
+## [05월 11일]
+### Date 객체
+
+###### 7-5
 생성자 함수|설명
 --|--
 new Date()|현재 시간으로 Date 객체를 생성합니다.
