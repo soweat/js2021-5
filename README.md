@@ -1,5 +1,283 @@
 # 서민석 [202030215]
 
+## [05월 25일]
+
+### 요청과 응답
+
+* 요청 메세지 : 클라이언트가 서버로 보내는 편지
+* 응답 메세지 : 서버가 클라이언트로 보내는 편지
+
+
+###### 10-2
+
+```
+// 모듈을 추출
+const express = require('express');
+
+// 서버를 생성
+const app = express();
+
+// request 이벤트 리스너 설정
+app.get('/page/:id', (request, response) => {
+    // 토큰을 꺼냅니다.
+    const id = request.params.id;
+
+    // 응답합니다.
+    response.send(`<h1>${id} Page</h1>`);
+});
+
+// 서버를 실행
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+
+<hr>
+
+## response 객체
+
+메소드|설명
+-|-
+send()|데이터 본문을 제공합니다.
+status()|상태 코드를 제공합니다.
+set()|헤더를 설정합니다.
+
+* send() 메소드 : 사용자에게 데이터 본문을 제공
+* send() 메소드는 가장 마지막에 실행해야 하며, 두 번 실행할 수 없음
+
+### Content-Type
+* 서버가 Content-Type을 제공 : 웹 브라우저는 헤더를 확인, 제공된 데이터의 형태를 확인(MIME라는 문자열로 제공)
+
+###### MIME 형식
+MIME 형식|설명
+-|-
+text/plain|기본적인 텍스트를 의미합니다.
+text/html|html 데이터를 의미합니다.
+image/png|png 데이터를 의미합니다.
+audio/png|png 데이터를 의미합니다.
+video/mpeg|MPEG 비디오
+application/json|json 데이터를 의미합니다.
+multipart/form-data|입력 양식 데이터를 의미합니다.
+
+* MIME 형식을 지정:type() 메소드 사용
+###### Content-Type 지정 메소드
+
+메소드|설명
+-|-
+type()|Content-Type을 MIME 형식으로 지정합니다.
+
+<hr>
+
+
+### HTTP 상태 코드 : 404 Not Found
+* 상태 코드 : 서버가 클라이언트에 '해당 경로는 이러한 상태'라고 알려 주는 용도
+
+###### HTTP 상태 코드의 예
+
+HTTP 상태 코드|설명|예
+-|-|-
+1XX|처리 중|100 Continue
+2XX|성공|200 OK
+3XX|리다이렉트|300 Multiple Choices
+4XX|클라이언트 오류|400 Bad Request
+5XX|서버 오류|500 internal Server Error
+
+* 상태 코드를 지정 : status () 메소드 사용
+
+###### status()메소드
+메소드|설명
+-|-
+status()|상태 코드를 지정합니다.
+
+###### 상태코드
+```
+// 모듈을 추출합니다.
+const express = require('express');
+
+// 서버를 생성합니다.
+const app = express();
+
+// request 이벤트 리스너를 설정합니다.
+app.get('*', (request, response) => {
+    response.status(404);
+    response.send('해당 경로에는 아무것도 없습니다.');
+});
+
+// 서버를 실행합니다.
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+
+<hr>
+
+### 리다이렉트 : 3XX, 특수한 상태 코드
+* 웹 브라우저가 리다이렉트를 확인하면 화면을 출력하지 않고, 응답 헤더에 있는 Location 속성을 확인해서 해당 위치로 이동
+* 특정 경로로 웹 브라우저를 인도 할 때 사용
+
+```
+// 모듈을 추출합니다
+const express = require('express');
+
+// 서버를 생성합니다.
+const app = express();
+
+// request 이벤트 리스너를 설정합니다.
+app.get('*', (request, response) => {
+    response.redirect('http://hanbit.co.kr');
+});
+
+// 서버를 실행합니다.
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+
+<hr>
+
+### request 객체
+* 요청 매개 변수
+
+##### ↓ https://search.naver.com/search.naver?where=nexearch&query=초콜릿&sm=top_hty&fbm=0&ie=utf8
+
+분류|값|설명
+-|-|-
+프로토콜|HTTPS|통신에 사용되는 규칙을 의미합니다.
+호스트|(search.)naver.com|애플리케이션 서버(또는 분산 장치 등)의 위치를 의미합니다.
+URL|search.naver|애플리케이션 서버 내부에서 라우트 위치를 나타냅니다.
+요청 매개 변수|?where=nexearch&query=초콜릿&sm=top_hty&fbm=0&ie=utf8|추가적인 정보를 의미합니다
+
+```
+// 모듈을 추출합니다.
+const express = require('express');
+
+// 서버를 생성합니다.
+const app = express();
+
+// request 이벤트 리스너를 설정합니다.
+app.get('*', (request, response) => {
+    console.log(request.query);
+    response.send(request.query);
+});
+
+// 서버를 실행합니다.
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+
+<hr>
+
+### 미들웨어
+
+메소드|설명
+-|-
+use()|미들웨어를 설정합니다.
+
+* #### 정적 파일 제공
+###### 웹 페이지에서 변경되지 않는 요소(이미지,음악,자바스크립트 파일,스타일시트 파일 등)를 쉽게 제공
+
+```
+// 모듈을 추출합니다.
+const express = require('express');
+
+// 서버를 생성합니다.
+const app = express();
+app.use(express.static('public'));
+
+// request 이벤트 리스너를 설정합니다.
+app.get('*', (request, response) => {
+    response.send(404);
+    response.send('해당 경로에는 아무것도 없습니다.');
+});
+
+// 서버를 실행합니다.
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+
+<hr>
+
+### morgan 미들웨어
+* express 모듈의 미들웨어로 사용할 수 있는 외부 모듈을 확인
+
+```
+// 모듈을 추출합니다.
+const express = require('express');
+const morgan = require('morgan');
+
+// 서버를 생성합니다.
+const app = express();
+app.use(express.static('public'));
+app.use(morgan('combined'));
+
+// request 이벤트 리스너를 설정합니다.
+app.get('*', (request, response) => {
+    response.send('명령 프롬프트를 확인해주세요.');
+});
+
+// 서버를 실행합니다.
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+<hr>
+
+### body-parser 미들웨어
+* 클라이언트 서버로 데이터 전송 
+
+MIME 형식|설명
+-|-
+application/x-www-form-urlencoded|웹 브라우저에서 입력 양식을 POST, PUT, DELETE 방식 등으로 전달
+application/json|JSON 데이터로 요청하는 방식입니다.
+multipart/form-data|대용량 파일을 전송할 때 사용하는 요청 방식입니다.
+```
+// 모듈을 추출합니다.
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+
+// 서버를 생성합니다.
+const app = express();
+app.use(express.static('public'));
+app.use(morgan('combined'));
+app.use(bodyParser.urlencoded({ extended: false}));
+
+// request 이벤트 리스너를 설정합니다.
+app.get('/', (request, response) => {
+    // html 형식의 문자열을 생성합니다.
+    let output = '';
+    output += '<form method="post">';
+    output += ' <input type="text" name="a" />';
+    output += ' <input type="text" name="b" />';
+    output += ' <input type="submit" />;
+    output += '</form>';
+
+    // 응답합니다.
+    response.send(output);
+});
+
+app.post('/', (request, response) => {
+    // 응답합니다.
+    response.send(request.body);
+});
+
+// 서버를 실행합니다.
+    app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+
+<hr>
+
+속성 정리|클라이언트가 서버로 데이터를 전송하는 세 가지 방법
+-|-
+params 객체|URL의 토큰. 보기가 간편
+query 객체|URL의 요청 매개 변수.토큰보다 많은 데이터를 전달할 수 있으며, 주소로 어떤 데이터가 오고 가는지 확인가능
+body 객체|대용량 문자열 등을 전송할 때 사용. 주소에 데이터를 기록하지 못하므로 새로고침이나 즐겨찾기 기능 등을 활용할 수 없음
+
+
 ## [05월 18일]
 
 ### 전역변수
