@@ -1,5 +1,214 @@
 # 서민석 [202030215]
 
+## [06월 1일]
+
+### let 키워드와 const 키워드
+
+최신 버전 자바스크립트 코드|인터넷 익스플로러에서 사용해야 하는 코드
+-|-
+let variable = 273;|var variableA = 273;
+const constant = "Hello World";|var variable = "Hello World";
+
+<hr>
+
+### 템플릿 문자열
+
+최신 버전 자바스크립트 코드|인터넷 익스플로러에서 사용해야 하는 코드
+-|-
+let variable = 273;|var variable = 273;
+console.log(`변수의 값은 ${variable}입니다.`);|console.log('변수의 값은 ' + variable + '입니다.');
+
+<hr>
+
+### 화살표 함수
+
+최신 버전 자바스크립트 코드|인터넷 익스플로러에서 사용해야 하는 코드
+-|-
+const functionLiteral = () => {};|const functionLiteral = function () {};
+
+<hr>
+
+### for of 반복문
+
+최신 버전 자바스크립트 코드|인터넷 익스플로러에서 사용해야 하는 코드
+-|-
+const array = ['가', '나', '다'];|var array = ['가', '나', '다'];
+for (let item of array) {console.log(item);}|for (var item in array) {console.log(array[i]);}
+
+<hr>
+
+### window 객체
+
+* window 객체 : 웹 페이지 자체를 나타냄
+* 새로운 화면을 열거나 웹 브라우저의 크기를 변경하는 등의 일
+* 대표적으로 경고 출력을 하는 경고창과 입력을 하는 프롬프트를 제공함
+
+함수|설명
+-|-
+alert(<메시지>)|경고창을 출력합니다.
+prompt(<메시지>,<임시 글자>)|프롬프트를 출력합니다.
+
+<hr>
+
+### screen 객체
+
+속성|설명
+-|-
+width|화면의 너비
+height|화면의 높이
+availWidth|실제 화면에서 사용 가능한 너비
+availHeight|실제 화면에서 사용 가능한 높이
+colorDepth|사용 가능한 색상 수
+pixelDepth|한 픽셀당 비트 수
+
+<hr>
+
+### location 객체의 속성
+
+속성|설명|예
+-|-|-
+href|문서의 URL 주소|
+host|호스트 이름과 포트 번호|localhost:52273
+hostname|호스트 이름|localhost
+port|포트 번호|52273
+pathname|디렉터리 경로|/forderHTMLPage.html
+hash|앵커 이름(#~)|#test
+search|요청 매개 변수|?param=10
+protocol|프로토콜 종류|http:
+
+
+<hr>
+
+### location 객체의 메소드
+
+메소드|설명
+-|-
+assign(<링크>)|매개 변수로 전달한 위치로 이동합니다.
+reload()|새로고침합니다.
+replace()|매개 변수로 전달한 위치로 이동합니다(뒤로 가기 불가능).
+
+<hr>
+
+### history 객체의 메소드
+
+메소드|설명
+-|-
+forward()|앞으로 이동합니다.
+back()|뒤로 이동합니다.
+
+<hr>
+
+### navigator 객체
+
+* 웹 페이지를 실행하는 웹 브라우저 정보가 들어있음
+* 사용자의 웹 브라우저, 운영체제를 구분할 수 있음
+
+속성|설명
+-|-
+appCodeName|웹 브라우저의 코드 이름
+appName|웹 브라우저의 이름
+appVersion|웹 브라우저의 버전
+platform|사용 중인 운영체제의 시스템 환경
+userAgent|웹 브라우저의 전체적인 정보
+
+<hr>
+
+### 문서 객체 선택
+
+메소드|설명
+-|-
+parent()|부모 태그를 선택합니다.
+find()|후손 태그를 찾습니다.
+
+<hr>
+
+### 문서 객체 개별 조작
+
+속성|설명
+-|-
+length|선택된 문서 객체의 수를 구합니다.
+
+메소드|설명
+-|-
+get()|선택한 문서 객체 중 하나를 선택합니다.
+
+<hr>
+
+### 문서 조작
+
+메소드|설명
+-|-
+text()|html 태그 내부의 문자를 조작합니다.
+html()|html 태그 내부의 문자를 조작합니다(HTML 태그 인식).
+
+<hr>
+
+### 속성 조작
+
+* attr()
+
+메소드|설명
+-|-
+attr()|속성을 조작합니다.
+
+<hr>
+
+### 문서 객체 추가 메소드
+
+메소드|설명
+-|-
+$(<`A`>).prependTo(<`B`>)|A를 B 안쪽 앞에 추가합니다.
+$(<`A`>).appendTo(<`B`>)|A를 B 안쪽 뒤에 추가합니다.
+$(<`A`>).insertBefore(<`B`>)|A를 B 앞에 추가합니다.
+$(<`A`>).insertAfter(<`B`>)|A를 B 뒤에 추가합니다.
+
+<hr>
+
+### 이벤트
+
+###### jQuery의 이벤트 메소드
+
+메소드|설명
+-|-
+on()|이벤트를 연결합니다.
+off()|이벤트를 제거합니다.
+
+###### 키보드 이벤트
+
+메소드|설명
+-|-
+keydown()|키보드 키를 눌렀을 때
+keypress()|키가 입력되었을 때
+keyup()|키보드 키를 떼었을 때
+
+###### 마우스 이벤트
+
+메소드|설명
+-|-
+click()|마우스를 클릭했을 때
+dbclick()|마우스를 더블 클릭했을 때
+mousedown()|마우스 버튼을 눌렀을 때
+mouseenter()|마우스 커서가 해당 태그로 들어갔을 때
+mouseleave()|마우스 커서가 해당 태그에서 나갔을 때
+mousemove()|마우스가 움직일 때
+mouseup()|마우스 버튼을 뗄 때
+
+###### 입력 양식 이벤트
+메소드|설명
+-|-
+blur()|입력 양식에 값 
+change()|입력을 종료할 때
+focus()|입력 양식에 값 입력을 시작할 때
+select()|type 속성이 select인 입력 양식의 목록에서 값을 선택했을 때
+submit()|type 속성이 submit인 입력 양식을 클릭했을 때
+
+###### 웹 브라우저 이벤트
+
+메소드|설명
+-|-
+resize()|웹 브라우저의 크기를 변경할 때
+scroll()|웹 브라우저를 스크롤할 때
+
 ## [05월 25일]
 
 ### 요청과 응답
